@@ -47,11 +47,12 @@ angular.module("dateRangePicker").directive "dateRangePicker", ["$compile", "$ti
   replace: true
   template: """
   <span tabindex="0" ng-keydown="hide()" class="angular-date-range-picker__input">
-    <span ng-if="showRanged">
+    <span ng-if="fixedplaceholder" class="date-range-picker-placeholder">{{fixedplaceholder}}</span> 
+    <span ng-if="showRanged" class="date-range-picker-showrange">
       <span ng-show="!!model">{{ model.start.format("ll") }} - {{ model.end.format("ll") }}</span>
       <span ng-hide="!!model">Select date range</span>
     </span>
-    <span ng-if="!showRanged">
+    <span ng-if="!showRanged" class="date-range-picker-showrange">
       <span ng-show="!!model">{{ model.format("ll") }}</span>
       <span ng-hide="!!model">Select date</span>
     </span>
@@ -66,6 +67,7 @@ angular.module("dateRangePicker").directive "dateRangePicker", ["$compile", "$ti
     pastDates: "@"
     textApply: "@"
     textCancel: "@"
+    fixedplaceholder: "@"
     callback: "&"
 
   link: ($scope, element, attrs) ->
